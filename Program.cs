@@ -187,7 +187,7 @@ namespace ListaAdatSzerkezet
 		}
 		#endregion
 
-		#region
+		#region Hűtő
 		static List<string> huto = new List<string>();
 		static bool Feltoltes(bool feltoltot)
 		{
@@ -326,6 +326,56 @@ namespace ListaAdatSzerkezet
 			} while (be != '7');
 		}
 		#endregion
+
+		#region Panzió
+		static void Panzio()
+		{
+			char be = ' ';;
+			do
+			{
+				Console.WriteLine();
+				Console.Write("Fogalalás: (1)\nFoglalások listázása: (2)\nFoglalás törlése: (3)\nVendégek száma: (4)\nKiírja a hűtő tartalmát fájlba: (5)\nBeolvasuk a fájl tartalmát faájból: (6)\nKilépés: (7)\n\tAdjon meg utasítást:");
+				be = Console.ReadLine()[0];
+
+				switch (be)
+				{
+					case '1':
+						Listazas();
+						break;
+
+					case '2':
+						Kivesz();
+						break;
+
+					case '3':
+						Betesz();
+						break;
+
+					case '4':
+						Kiurit();
+						break;
+
+					case '5':
+						Kiirfajba();
+						break;
+
+					case '6':
+						Beolvasfajlbol();
+						break;
+
+					case '7':
+						Console.WriteLine("Kilépés...");
+						break;
+
+					default:
+						Console.WriteLine("A folyamat csak az utasítások melleti számokkal müködik!");
+						break;
+				}
+				Console.WriteLine();
+
+			} while (be != '7');
+		}
+		#endregion
 		static void Main(string[] args)
 		{
 			#region bevezetes
@@ -358,8 +408,12 @@ namespace ListaAdatSzerkezet
 			Spin();
 			#endregion
 
-			#region
+			#region Hűtő
 			Huto();
+			#endregion
+
+			#region Panzió
+			Panzio();
 			#endregion
 
 			Console.ReadKey();
