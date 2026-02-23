@@ -48,10 +48,19 @@ namespace ListaAdatSzerkezet
 			Console.WriteLine($"A listában {negativok} darab negatív szám van!");
 			Console.WriteLine($"A pozítiv számok száma: {lista.Count(x => x > 0)}");
 		}
+		static void atlag()
+		{
+			int ossz = lista.Sum();
+			int db = lista.Count;
+			double atlag = (double)ossz / db;
+			Console.WriteLine($"A lista elemeinek átlaga: {Math.Round(atlag, 2)}");
+			Console.WriteLine($"A lista elemeinek átlaga: {Math.Round(lista.Average(), 2)}");
+		}
 		static void Main(string[] args)
 		{
 			Feltolt(15);
 			negativSzamok();
+			atlag()
 		}
 	}
 }
