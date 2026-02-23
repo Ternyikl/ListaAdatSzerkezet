@@ -9,12 +9,13 @@ namespace ListaAdatSzerkezet
 	internal class Program
 	{
 		static List<int> lista = new List<int>();
+		static Random rnd = new Random();
 
 		static void Feltolt(int elemekszama)
 		{
 			for (int i = 0; i < elemekszama; i++)
 			{
-				lista.Add(i);
+				lista.Add(rnd.Next(-20, 21));
 				Console.WriteLine($"Az index: {i} - capacitás: {lista.Capacity}");
 			}
 			Console.WriteLine($"Az elemek száma a listában: {lista.Count}");
@@ -30,9 +31,27 @@ namespace ListaAdatSzerkezet
 			Console.WriteLine();
 			
 		}
+
+		static void negativSzamok()
+		{
+			int negativok = 0;
+
+			foreach (var item in lista)
+			{
+				if(item < 0)
+				{
+					negativok++;
+					Console.Write(item + " ");
+				}
+			}
+
+			Console.WriteLine($"A listában {negativok} darab negatív szám van!");
+			Console.WriteLine($"A pozítiv számok száma: {lista.Count(x => x > 0)}");
+		}
 		static void Main(string[] args)
 		{
 			Feltolt(15);
+			negativSzamok();
 		}
 	}
 }
