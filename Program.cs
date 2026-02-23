@@ -328,66 +328,153 @@ namespace ListaAdatSzerkezet
 		#endregion
 
 		#region Panzió
-		static void Panzio()
+
+		static List<int> szobak = new List<int>();
+		static int szobak_szama = 12;
+		static int valos_bevetel = 0;
+
+		static void Fogalalas()
 		{
-			char be = ' ';;
-			do
+            Console.Write("Hány vendég érkezik? ");
+            int vendegek = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < szobak_szama && vendegek > 0; i++)
+            {
+                if (i == szobak.Count)
+                {
+                    if (vendegek >= 2)
+                    {
+						szobak.Add(2);
+                        vendegek -= 2;
+                    }
+                    else
+                    {
+                        szobak.Add(1);
+                        vendegek--;
+                    }
+
+                    Console.WriteLine($"Szoba {i + 1} lefoglalva ({szobak[i]} fő).");
+                }
+            }
+
+            if (vendegek > 0)
+                Console.WriteLine("Sajnos nincs elég szabad szoba!");
+            Console.WriteLine();
+        }
+		static void Fogalalasok_Listazas()
+		{
+			int szamlalo = 1;
+			foreach (var item in szobak)
 			{
-				Console.WriteLine();
-				Console.Write("Fogalalás: (1)\nFoglalások listázása: (2)\nFoglalás törlése: (3)\nVendégek száma: (4)\nKiírja a hűtő tartalmát fájlba: (5)\nBeolvasuk a fájl tartalmát faájból: (6)\nKilépés: (7)\n\tAdjon meg utasítást:");
-				be = Console.ReadLine()[0];
+                Console.WriteLine($"Szoba {szamlalo}: {item} fő");
+				szamlalo++;
+            }
+            Console.WriteLine();
+		}
+		static void Szoba_torles()
+		{
+            Console.Write("Melyik szobát szeretné törölni? ");
+            int torles = int.Parse(Console.ReadLine());
 
-				switch (be)
+            if (torles >= 1 && torles <= szobak_szama)
+            {
+				szobak.RemoveAt(torles - 1);
+                Console.WriteLine("Foglalás törölve.");
+            }
+            else
+            {
+                Console.WriteLine("Érvénytelen szobaszám!");
+            }
+			Console.WriteLine();
+        }
+		static void Ossz_vendeg()
+		{
+            int osszvendeg = 0;
+            foreach (var item in szobak)
+			{
+                osszvendeg += item;
+            }
+
+            Console.WriteLine($"Összes vendég: {osszvendeg} fő");
+			Console.WriteLine();
+        }
+		static void Bevetel()
+		{
+            int bevetel = 0;
+            foreach (int fo in szobak)
+            {
+				if (fo == 2) { bevetel += 36000; }
+				else if (fo == 1) { bevetel += 24000; }
+            }
+			valos_bevetel = bevetel;
+
+            Console.WriteLine($"Összes bevétel: {bevetel} Ft");
+			Console.WriteLine();
+        }
+		static void Veszteseg()
+		{
+            Console.WriteLine($"Kiesett bevétel: {(szobak_szama * 36000) - valos_bevetel} Ft");
+            Console.WriteLine();
+        }
+        static void Panzio()
+		{
+			int valasztas;
+
+            do
+			{
+                Console.Write("Foglalás kezelő\nFoglalás: (1)\nFoglalások listázása: (2)\nFoglalás törlése: (3)\nVendégek száma: (4)\nBevétel: (5)\nKiesett bevétel: (6)\nKilépés: (7)\nAdjon meg utasítást: ");
+				valasztas = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                switch (valasztas)
 				{
-					case '1':
-						Listazas();
-						break;
+					case 1:
+						Fogalalas();
+                        break;
 
-					case '2':
-						Kivesz();
-						break;
+					case 2:
+						Fogalalasok_Listazas();
+                        break;
 
-					case '3':
-						Betesz();
-						break;
+					case 3:
+						Szoba_torles();
+                        break;
 
-					case '4':
-						Kiurit();
-						break;
+					case 4:
+						Ossz_vendeg();
+                        break;
 
-					case '5':
-						Kiirfajba();
-						break;
+					case 5:
+						Bevetel();
+                        break;
 
-					case '6':
-						Beolvasfajlbol();
-						break;
+					case 6:
+						Veszteseg();
+                        break;
 
-					case '7':
-						Console.WriteLine("Kilépés...");
+					case 7:
+                        Console.WriteLine("Kilépés...");
 						break;
 
 					default:
 						Console.WriteLine("A folyamat csak az utasítások melleti számokkal müködik!");
 						break;
 				}
-				Console.WriteLine();
-
-			} while (be != '7');
+			} while (valasztas != 7);
 		}
 		#endregion
 		static void Main(string[] args)
 		{
 			#region bevezetes
-			//Feltolt(15);
-			//negativSzamok();
-			//atlag();
+			Feltolt(15);
+			negativSzamok();
+			atlag();
 			#endregion
 
 			#region Sütik
 			Sutikelhelyezese();
 			Csokissutik();
-			if(sutik.Contains("epertorta"))
+			if (sutik.Contains("epertorta"))
 			{
 				Console.WriteLine("Van epertorta");
 			}
