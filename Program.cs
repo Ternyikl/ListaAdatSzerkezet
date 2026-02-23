@@ -8,9 +8,9 @@ namespace ListaAdatSzerkezet
 {
 	internal class Program
 	{
-		static List<int> lista = new List<int>();
 		static Random rnd = new Random();
-
+		#region bevezetes
+		static List<int> lista = new List<int>();
 		static void Feltolt(int elemekszama)
 		{
 			for (int i = 0; i < elemekszama; i++)
@@ -56,11 +56,27 @@ namespace ListaAdatSzerkezet
 			Console.WriteLine($"A lista elemeinek átlaga: {Math.Round(atlag, 2)}");
 			Console.WriteLine($"A lista elemeinek átlaga: {Math.Round(lista.Average(), 2)}");
 		}
+		#endregion
+
+		#region Sütik
+		static List<string> sutik = new List<string>() { "csokis muffin", "epertorta", "túrótorta", "isler", "citromtorta", "csokis puszedli", "epres muffin", "francia krémes" };
+
+		static void sutikelhelyezese()
+		{
+			sutik.Add("csokitorta");
+			foreach (var item in sutik)
+			{
+				Console.WriteLine(item);
+			}
+		}
+		#endregion
 		static void Main(string[] args)
 		{
-			Feltolt(15);
-			negativSzamok();
-			atlag()
+			//Feltolt(15);
+			//negativSzamok();
+			//atlag();
+
+			sutikelhelyezese();
 		}
 	}
 }
