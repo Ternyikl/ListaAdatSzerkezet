@@ -362,7 +362,7 @@ namespace ListaAdatSzerkezet
 			Huto();
 			#endregion
 
-			Console.WriteLine();
+			Console.WriteLine("asd");
 			Console.ReadKey();
 		}
 	}
