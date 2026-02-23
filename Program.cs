@@ -237,6 +237,7 @@ namespace ListaAdatSzerkezet
 
 			if (be != "")
 			{
+				be = be.ToLower();
 				huto.Add(be);
 				Console.WriteLine($"{be} bekerült a hűtöbe!");
 			}
@@ -265,10 +266,11 @@ namespace ListaAdatSzerkezet
 		static void Beolvasfajlbol()
 		{
 			StreamReader sr = new StreamReader("huto.txt");
-			while( sr.EndOfStream )
+			while(!sr.EndOfStream)
 			{
 				huto.Add(sr.ReadLine().ToString());
 			}
+			Console.WriteLine("A huto tartalma be lett olvasba");
 			sr.Close();	
 		}
 		static void Huto()
@@ -281,7 +283,8 @@ namespace ListaAdatSzerkezet
 				{
 					feltoltot = Feltoltes(feltoltot);
 				}
-				Console.Write("Adjon meg utasítást:\n\tListáza ki a hűtő tartalmát: (1)\n\tKivesz egy ételt a hűtőböl: (2)\n\tBetesz valamit a hűtőbe: (3)\n\tKitakarítja a hűtő tartalmát: (4)\n\tKiírja a hűtő tartalmát fájlba: (5)\n\tBeolvasuk a fájl tartalmát faájból: (6)\n\tKilépés: (7)");
+				Console.WriteLine();
+				Console.Write("Listáza ki a hűtő tartalmát: (1)\nKivesz egy ételt a hűtőböl: (2)\nBetesz valamit a hűtőbe: (3)\nKitakarítja a hűtő tartalmát: (4)\nKiírja a hűtő tartalmát fájlba: (5)\nBeolvasuk a fájl tartalmát faájból: (6)Kilépés: (7)\n\tAdjon meg utasítást:");
 				be = Console.ReadLine()[0];
 
 				switch(be)
@@ -318,8 +321,9 @@ namespace ListaAdatSzerkezet
 						Console.WriteLine("A folyamat csak az utasítások melleti számokkal müködik!");
 						break;
 				}
+				Console.WriteLine();
 
-			} while (be != '6');
+			} while (be != '7');
 		}
 		#endregion
 		static void Main(string[] args)
