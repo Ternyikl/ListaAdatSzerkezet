@@ -284,7 +284,7 @@ namespace ListaAdatSzerkezet
 					feltoltot = Feltoltes(feltoltot);
 				}
 				Console.WriteLine();
-				Console.Write("Listáza ki a hűtő tartalmát: (1)\nKivesz egy ételt a hűtőböl: (2)\nBetesz valamit a hűtőbe: (3)\nKitakarítja a hűtő tartalmát: (4)\nKiírja a hűtő tartalmát fájlba: (5)\nBeolvasuk a fájl tartalmát faájból: (6)Kilépés: (7)\n\tAdjon meg utasítást:");
+				Console.Write("Listáza ki a hűtő tartalmát: (1)\nKivesz egy ételt a hűtőböl: (2)\nBetesz valamit a hűtőbe: (3)\nKitakarítja a hűtő tartalmát: (4)\nKiírja a hűtő tartalmát fájlba: (5)\nBeolvasuk a fájl tartalmát faájból: (6)\nKilépés: (7)\n\tAdjon meg utasítást:");
 				be = Console.ReadLine()[0];
 
 				switch(be)
@@ -362,7 +362,6 @@ namespace ListaAdatSzerkezet
 			Huto();
 			#endregion
 
-			Console.WriteLine("asd");
 			Console.ReadKey();
 		}
 	}
