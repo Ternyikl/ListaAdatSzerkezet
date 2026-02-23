@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ListaAdatSzerkezet
 {
@@ -185,6 +186,142 @@ namespace ListaAdatSzerkezet
 			Console.WriteLine();
 		}
 		#endregion
+
+		#region
+		static List<string> huto = new List<string>();
+		static bool Feltoltes(bool feltoltot)
+		{
+			string be = " ";
+
+			do
+			{
+				Console.Write("Mit teszünk be a hűtőbe? ");
+				be = Console.ReadLine();
+
+				if(be != "")
+				{
+					huto.Add(be);
+				}
+			} while (be != "");
+
+			feltoltot = true;
+
+			return feltoltot;
+		}
+		static void Listazas()
+		{
+			foreach (var item in huto)
+			{
+				Console.WriteLine(item);
+			}
+		}
+		static void Kivesz()
+		{
+			Console.Write("Adja meg mit szeretne kivenni a hűtőböl (kiléphez adjon meg üreset): ");
+			string kivesz = Console.ReadLine();
+
+			if(huto.Contains(kivesz))
+			{
+				huto.Remove(kivesz);
+				Console.WriteLine($"Jóétvágyat a: {kivesz}");
+			}
+			else
+			{
+				Console.WriteLine("Ezt már megetted, nincs benne a hűtőben!");
+			}
+		}
+		static void Betesz()
+		{
+			Console.Write("Mit teszünk be a hűtőbe? ");
+			string be = Console.ReadLine();
+
+			if (be != "")
+			{
+				huto.Add(be);
+				Console.WriteLine($"{be} bekerült a hűtöbe!");
+			}
+			else
+			{
+				Console.WriteLine("Nem adott meg információt!");
+			}
+		}
+		static void Kiurit()
+		{
+			huto.Clear();
+			Console.WriteLine("Hűtő kiüritve jellenleg nincs benne semmi!");
+		}
+		static void Kiirfajba()
+		{
+			StreamWriter sr = new StreamWriter("huto.txt");
+
+			foreach (var item in huto)
+			{
+				string s = $"{item}\n";
+				sr.Write(s);
+			}
+			Console.WriteLine("A hűtő tartalma ki lett írva fájlba!");
+			sr.Close();
+		}
+		static void Beolvasfajlbol()
+		{
+			StreamReader sr = new StreamReader("huto.txt");
+			while( sr.EndOfStream )
+			{
+				huto.Add(sr.ReadLine().ToString());
+			}
+			sr.Close();	
+		}
+		static void Huto()
+		{
+			char be = ' ';
+			bool feltoltot = false;
+			do
+			{
+				if(!feltoltot)
+				{
+					feltoltot = Feltoltes(feltoltot);
+				}
+				Console.Write("Adjon meg utasítást:\n\tListáza ki a hűtő tartalmát: (1)\n\tKivesz egy ételt a hűtőböl: (2)\n\tBetesz valamit a hűtőbe: (3)\n\tKitakarítja a hűtő tartalmát: (4)\n\tKiírja a hűtő tartalmát fájlba: (5)\n\tBeolvasuk a fájl tartalmát faájból: (6)\n\tKilépés: (7)");
+				be = Console.ReadLine()[0];
+
+				switch(be)
+				{
+					case '1':
+						Listazas();
+						break;
+
+					case '2':
+						Kivesz();
+						break;
+
+					case '3':
+						Betesz();
+						break;
+
+					case '4':
+						Kiurit();
+						break;
+
+					case '5':
+						Kiirfajba();
+						break;
+
+					case '6':
+						Beolvasfajlbol();
+						break;
+
+					case '7':
+						Console.WriteLine("Kilépés...");
+						break;
+
+					default:
+						Console.WriteLine("A folyamat csak az utasítások melleti számokkal müködik!");
+						break;
+				}
+
+			} while (be != '6');
+		}
+		#endregion
 		static void Main(string[] args)
 		{
 			#region bevezetes
@@ -216,6 +353,12 @@ namespace ListaAdatSzerkezet
 			Magasahangrendu();
 			Spin();
 			#endregion
+
+			#region
+			Huto();
+			#endregion
+
+			Console.ReadKey();
 		}
 	}
 }
